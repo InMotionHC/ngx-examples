@@ -3,6 +3,6 @@
  */
 
 export * from './lib/changes.module';
-export * from './lib/changes.service';
 export * from './lib/changes.directive';
 export * from './lib/changes.model';
+export * from './lib/changes.utils';
