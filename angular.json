@@ -3,5 +3,37 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "changes": {
+      "projectType": "library",
+      "root": "projects/changes",
+      "sourceRoot": "projects/changes/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/changes/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/changes/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/changes/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/changes/src/test.ts",
+            "tsConfig": "projects/changes/tsconfig.spec.json",
+            "karmaConfig": "projects/changes/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "changes"
 }

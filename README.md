@@ -1,27 +1,30 @@
-# NgxExamples
+# Пример директивы изменений
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.4.
+```typescript
+// app.component.ts
+import { Component } from '@angular/core';
 
-## Development server
+interface Person {
+   name: string;
+   age: number;
+}
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+@Component({
+  selector: 'app-root',
+  template: `
+   <ng-container *changes="let changes in test1 and test2">
+      <div *ngIf="changes?.name">name - {{ changes.name }}</div>
+      <div *ngIf="changes?.age">age - {{ changes.age }}</div>
+   </ng-container>
+  `
+})
+export class AppComponent {
+  test1: Person = { name: 'Test1', age: 22 };
+  test2: Person = { name: 'Test2', age: 22 };
+}
+```
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Результат
+```html
+  name - true
+```
