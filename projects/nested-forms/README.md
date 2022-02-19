@@ -1,24 +1,55 @@
-# NestedForms
+# Пример вложенных форм
+```typescript
+// app.model.ts
+export interface Framework {
+   id: number;
+   name: string;
+}
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
+export interface Developer {
+   name: string;
+   frameworks: Framework[];
+}
 
-## Code scaffolding
+//frameworks.component.ts
+import { Component, Input } from '@angular/core';
 
-Run `ng generate component component-name --project nested-forms` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project nested-forms`.
-> Note: Don't forget to add `--project nested-forms` or else it will be added to the default project in your `angular.json` file. 
+import { Framework } from './app.model';
+import { ContainerProvider } from 'nested-forms';
 
-## Build
+@Component({
+   selector: 'frameworks',
+   viewProviders: [ContainerProvider],
+   template: `
+      <ng-container ngModelGroup="frameworks">
+         <div *ngFor="let framework of frameworks">
+            <input type="text" [(ngModel)]="framework.name" name="{{framework.id}}" />
+         </div>
+      </ng-container>
+   `
+})
+export class FrameworksComponent {
+   @Input() frameworks: Framework[];
+}
 
-Run `ng build nested-forms` to build the project. The build artifacts will be stored in the `dist/` directory.
+// app.component.ts
+import { Component } from '@angular/core';
 
-## Publishing
+import { Developer } from './app.model';
 
-After building your library with `ng build nested-forms`, go to the dist folder `cd dist/nested-forms` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test nested-forms` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+@Component({
+  selector: 'app-root',
+  template: `
+    <form>
+      <input type="text" [(ngModel)]="developer.name" [name]="'name'" />
+      <frameworks [frameworks]="developer.frameworks"></frameworks>
+    </form>
+  `
+})
+export class AppComponent {
+  developer: Developer = { name: 'Test1', frameworks: [ 
+    { id: 1, name: 'ASP.NET MVC' },
+    { id: 2, name: 'Angular' },
+  ]};
+}
+```

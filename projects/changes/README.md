@@ -1,24 +1,29 @@
-# Changes
+# Пример директивы изменений
+```typescript
+// app.component.ts
+import { Component } from '@angular/core';
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
+interface Person {
+   name: string;
+   age: number;
+}
 
-## Code scaffolding
+@Component({
+  selector: 'app-root',
+  template: `
+   <ng-container *changes="let changes in test1 and test2">
+      <div *ngIf="changes?.name">name - {{ changes.name }}</div>
+      <div *ngIf="changes?.age">age - {{ changes.age }}</div>
+   </ng-container>
+  `
+})
+export class AppComponent {
+  test1: Person = { name: 'Test1', age: 22 };
+  test2: Person = { name: 'Test2', age: 22 };
+}
+```
 
-Run `ng generate component component-name --project changes` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project changes`.
-> Note: Don't forget to add `--project changes` or else it will be added to the default project in your `angular.json` file. 
-
-## Build
-
-Run `ng build changes` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build changes`, go to the dist folder `cd dist/changes` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test changes` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Результат
+```html
+  name - true
+```
