@@ -33,6 +33,37 @@
           }
         }
       }
+    },
+    "nested-forms": {
+      "projectType": "library",
+      "root": "projects/nested-forms",
+      "sourceRoot": "projects/nested-forms/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/nested-forms/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/nested-forms/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/nested-forms/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/nested-forms/src/test.ts",
+            "tsConfig": "projects/nested-forms/tsconfig.spec.json",
+            "karmaConfig": "projects/nested-forms/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "defaultProject": "changes"

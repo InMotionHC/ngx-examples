@@ -7,11 +7,15 @@
       "changes": [
         "dist/changes/changes",
         "dist/changes"
+      ],
+      "nested-forms": [
+        "dist/nested-forms/nested-forms",
+        "dist/nested-forms"
       ]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
